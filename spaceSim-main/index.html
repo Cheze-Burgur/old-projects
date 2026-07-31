@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Space Physics - A Simulation</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="backdrop"></div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="topbar">
+        <div class="panel">
+            <div style="display:flex;gap:12px;align-items:center">
+                <div class="stat">
+                    <span class="label">Gravity (G)</span>
+                    <input id="gRange" class="slider" type="range" min="0" max="5" step="0.1" value="1">
+                    <span class="tiny">G: <span id="gValue">1</span></span>
+                </div>
+
+                <div class="stat">
+                    <span class="label">Sim Speed</span>
+                    <input id="timeRange" class="slider" type="range" min="0.1" max="3" step="0.1" value="1">
+                    <span class="tiny">x<span id="timeValue">1.00</span></span>
+                </div>
+
+                <div style="display:flex;flex-direction:column;align-items:flex-end;">
+                    <div style="display:flex;gap:6px;">
+                        <button id="pauseBtn" class="btn">Pause Sim (ESC)</button>
+                        <button id="clearBtn" class="btn">Clear (C)</button>
+                        <button id="viewBtn" class="btn">Recenter (R)</button>
+                    </div>
+                    <div style="display:flex;gap:6px; margin-top:6px;">
+                        <button id="toggleVel" class="btn" style="opacity: 0.7;">Indicators (I)</button>
+                        <button id="toggleCoords" class="btn" style="opacity: 0.7;">Coordinates (O)</button>
+                        <button id="toggleProperties" class="btn" style="opacity: 0.7;">Properties (P)</button>
+                    </div>
+                    <div class="tiny" style="margin-top:6px; text-align:right;">
+                        Bodies: <span id="count">0</span> &nbsp; • &nbsp; FPS: <span id="fps">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="help panel">
+            <strong class="accent">Controls:</strong><br>
+            WASD / Arrow keys → Move camera<br>
+            Scroll → Zoom<br>
+            Left Click → Spawn body<br>
+            Hold Left Click → Charge (drag to give velocity)<br>
+            Right Click → Delete body<br>
+            <strong class="accent">Tips:</strong><br>
+            Bodies merge on collision.<br>
+            Velocity is preserved on merge.<br>
+            Use the gridlines to position things.<br>
+            <div class="tiny">Less bodies = better performance.</div>
+        </div>
+    </div>
+
+    <div class="footer tiny">Made by <a href="https://github.com/Cheze-Burgur">@Cheze</a></div>
+
+    <div id="bodyMenu" class="modal panel" style="display: none;">
+        <h3>Edit Body</h3>
+        <label>X: <input id="bodyX" type="number"></label><br>
+        <label>Y: <input id="bodyY" type="number"></label><br>
+        <label>VX (km/s): <input id="bodyVX" type="number"></label><br>
+        <label>VY (km/s): <input id="bodyVY" type="number"></label><br>
+        <label>Mass (kg): <input id="bodyMass" type="number"></label><br>
+        <label>Radius (km): <input id="bodyR" type="number"></label><br>
+        <div style="margin-top:10px;">
+            <button id="applyBodyBtn" class="btn accent">Apply</button>
+            <button id="closeBodyBtn" class="btn">Close</button>
+            <button id="deleteBodyBtn" class="btn" style="float:right; background: #ff4c4c; color: white; border: none;">Delete Body</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
